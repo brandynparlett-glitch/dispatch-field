@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Minute Medic Dispatch Panel</title>
+  <title>Minute Medic Dispatch & Lease Finder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -32,11 +32,17 @@
       padding: 1.25rem;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
       border: 1px solid #1f2933;
+      margin-bottom: 1rem;
     }
 
     h1 {
       margin: 0 0 0.75rem 0;
       font-size: 1.6rem;
+    }
+
+    h2 {
+      margin: 0 0 0.75rem 0;
+      font-size: 1.3rem;
     }
 
     .subtitle {
@@ -117,9 +123,9 @@
       color: #fee2e2;
     }
 
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: default;
+    .btn-small {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
     }
 
     .table-wrapper {
@@ -209,6 +215,18 @@
       margin-top: 0.25rem;
     }
 
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 640px) {
       .card {
         padding: 0.9rem;
@@ -226,75 +244,147 @@
     <div class="card">
       <h1>Minute Medic Dispatch</h1>
       <div class="subtitle">
-        Simple field dispatch board for medics &amp; drivers. Add a call, assign crew, update status.
+        Simple field dispatch board for medics &amp; drivers, with a built-in lease finder for common LSDs / pads.
       </div>
 
-      <!-- FORM -->
-      <form id="dispatchForm">
-        <div class="grid">
-          <div>
-            <label for="callId">Call ID / Ticket #</label>
-            <input id="callId" name="callId" placeholder="e.g. BB-2025-001" required />
-          </div>
-          <div>
-            <label for="client">Client / Company</label>
-            <input id="client" name="client" placeholder="e.g. TC Energy" />
-          </div>
-          <div>
-            <label for="location">Location / LSD</label>
-            <input id="location" name="location" placeholder="e.g. 04-21-065-05W6" />
-          </div>
-          <div>
-            <label for="priority">Priority</label>
-            <select id="priority" name="priority">
-              <option>Low</option>
-              <option selected>Medium</option>
-              <option>High</option>
-            </select>
-          </div>
-          <div>
-            <label for="medic">Medic</label>
-            <input id="medic" name="medic" placeholder="e.g. Brandy" />
-          </div>
-          <div>
-            <label for="driver">Driver</label>
-            <input id="driver" name="driver" placeholder="e.g. John" />
-          </div>
-          <div>
-            <label for="status">Status</label>
-            <select id="status" name="status">
-              <option selected>Pending</option>
-              <option>En route</option>
-              <option>On scene</option>
-              <option>Complete</option>
-            </select>
-          </div>
-          <div>
-            <label for="eta">ETA / Start Time</label>
-            <input id="eta" name="eta" placeholder="e.g. 07:30" />
-          </div>
+      <div class="two-column">
+        <!-- LEFT: DISPATCH FORM -->
+        <div>
+          <h2>Dispatch Call</h2>
+          <form id="dispatchForm">
+            <div class="grid">
+              <div>
+                <label for="callId">Call ID / Ticket #</label>
+                <input id="callId" name="callId" placeholder="e.g. BB-2025-001" required />
+              </div>
+              <div>
+                <label for="client">Client / Company</label>
+                <input id="client" name="client" placeholder="e.g. TC Energy" />
+              </div>
+              <div>
+                <label for="location">Location / LSD</label>
+                <input id="location" name="location" placeholder="e.g. 04-21-065-05W6" />
+              </div>
+              <div>
+                <label for="priority">Priority</label>
+                <select id="priority" name="priority">
+                  <option>Low</option>
+                  <option selected>Medium</option>
+                  <option>High</option>
+                </select>
+              </div>
+              <div>
+                <label for="medic">Medic</label>
+                <input id="medic" name="medic" placeholder="e.g. Brandy" />
+              </div>
+              <div>
+                <label for="driver">Driver</label>
+                <input id="driver" name="driver" placeholder="e.g. John" />
+              </div>
+              <div>
+                <label for="status">Status</label>
+                <select id="status" name="status">
+                  <option selected>Pending</option>
+                  <option>En route</option>
+                  <option>On scene</option>
+                  <option>Complete</option>
+                </select>
+              </div>
+              <div>
+                <label for="eta">ETA / Start Time</label>
+                <input id="eta" name="eta" placeholder="e.g. 07:30" />
+              </div>
+            </div>
+
+            <div style="margin-top:0.75rem;">
+              <label for="notes">Notes</label>
+              <textarea id="notes" name="notes" placeholder="Gate codes, hazards, radio channel, etc."></textarea>
+            </div>
+
+            <div class="btn-row">
+              <button type="submit" class="btn btn-primary">
+                ➕ Add Call
+              </button>
+              <button type="button" id="clearFormBtn" class="btn btn-secondary">
+                ✖ Clear Form
+              </button>
+              <button type="button" id="exportBtn" class="btn btn-secondary">
+                ⬇ Export CSV
+              </button>
+            </div>
+          </form>
         </div>
 
-        <div style="margin-top:0.75rem;">
-          <label for="notes">Notes</label>
-          <textarea id="notes" name="notes" placeholder="Gate codes, hazards, radio channel, etc."></textarea>
-        </div>
+        <!-- RIGHT: LEASE FINDER -->
+        <div>
+          <h2>Lease Finder</h2>
+          <div class="tiny" style="margin-bottom:0.5rem;">
+            Save common leases / LSDs and push them into the call form with one click.
+          </div>
+          <form id="leaseForm">
+            <div class="grid">
+              <div>
+                <label for="leaseName">Lease / Pad Name</label>
+                <input id="leaseName" name="leaseName" placeholder="e.g. Fox Creek North Pad A" />
+              </div>
+              <div>
+                <label for="leaseClient">Client</label>
+                <input id="leaseClient" name="leaseClient" placeholder="e.g. CNRL" />
+              </div>
+              <div>
+                <label for="leaseLSD">LSD / Location</label>
+                <input id="leaseLSD" name="leaseLSD" placeholder="e.g. 04-21-065-05W6" />
+              </div>
+              <div>
+                <label for="leaseRoadNotes">Access / Road Notes</label>
+                <input id="leaseRoadNotes" name="leaseRoadNotes" placeholder="e.g. Locked forestry gate, radio Ch 3" />
+              </div>
+            </div>
+            <div style="margin-top:0.75rem;">
+              <label for="leaseExtra">Extra Notes</label>
+              <textarea id="leaseExtra" name="leaseExtra" placeholder="Landowner, dogs on site, speed limits, etc."></textarea>
+            </div>
+            <div class="btn-row">
+              <button type="submit" class="btn btn-primary btn-small">
+                💾 Save Lease
+              </button>
+              <button type="button" id="clearLeaseFormBtn" class="btn btn-secondary btn-small">
+                ✖ Clear
+              </button>
+            </div>
+          </form>
 
-        <div class="btn-row">
-          <button type="submit" class="btn btn-primary">
-            ➕ Add Call
-          </button>
-          <button type="button" id="clearFormBtn" class="btn btn-secondary">
-            ✖ Clear Form
-          </button>
-          <button type="button" id="exportBtn" class="btn btn-secondary">
-            ⬇ Export CSV
-          </button>
-        </div>
-      </form>
+          <div style="margin-top:1rem;">
+            <label for="leaseSearch">Search Leases</label>
+            <input id="leaseSearch" placeholder="Search by client, pad name, LSD..." />
+          </div>
 
-      <!-- TABLE -->
-      <div class="table-wrapper" style="margin-top:1.25rem;">
+          <div class="table-wrapper" style="margin-top:0.75rem; max-height:40vh;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Lease / Pad</th>
+                  <th>Client &amp; LSD</th>
+                  <th>Notes</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="leasesTableBody">
+                <!-- lease rows -->
+              </tbody>
+            </table>
+          </div>
+          <div class="tiny">
+            Leases are stored in your browser only (local storage). Clear browser data = clears this list.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DISPATCH TABLE -->
+    <div class="card">
+      <h2>Active Calls</h2>
+      <div class="table-wrapper">
         <table id="callsTable">
           <thead>
             <tr>
@@ -314,7 +404,7 @@
         </table>
       </div>
       <div class="tiny">
-        Tip: this is all front-end only. No login. No database. Perfect for GitHub Pages.
+        Front-end only. No login or database – ideal for GitHub Pages or embedding in GoDaddy.
       </div>
     </div>
   </div>
@@ -325,9 +415,34 @@
     const exportBtn = document.getElementById("exportBtn");
     const tableBody = document.querySelector("#callsTable tbody");
 
+    const leaseForm = document.getElementById("leaseForm");
+    const clearLeaseFormBtn = document.getElementById("clearLeaseFormBtn");
+    const leasesTableBody = document.getElementById("leasesTableBody");
+    const leaseSearchInput = document.getElementById("leaseSearch");
+
     /** In-memory list of calls */
     const calls = [];
 
+    /** Lease storage (using localStorage so leases stay after refresh) */
+    let leases = [];
+    try {
+      const stored = localStorage.getItem("minuteMedicLeases");
+      if (stored) {
+        leases = JSON.parse(stored);
+      }
+    } catch (e) {
+      leases = [];
+    }
+
+    function saveLeases() {
+      try {
+        localStorage.setItem("minuteMedicLeases", JSON.stringify(leases));
+      } catch (e) {
+        console.warn("Unable to save leases to localStorage", e);
+      }
+    }
+
+    // DISPATCH LOGIC
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
@@ -342,7 +457,7 @@
         eta: document.getElementById("eta").value.trim(),
         notes: document.getElementById("notes").value.trim(),
         createdAt: new Date().toLocaleString(),
-      };
+      });
 
       if (!call.callId) {
         alert("Call ID is required.");
@@ -497,6 +612,123 @@
       URL.revokeObjectURL(url);
     }
 
+    // LEASE FINDER LOGIC
+    leaseForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const lease = {
+        name: document.getElementById("leaseName").value.trim(),
+        client: document.getElementById("leaseClient").value.trim(),
+        lsd: document.getElementById("leaseLSD").value.trim(),
+        roadNotes: document.getElementById("leaseRoadNotes").value.trim(),
+        extra: document.getElementById("leaseExtra").value.trim(),
+        createdAt: new Date().toLocaleString(),
+      };
+
+      if (!lease.lsd && !lease.name) {
+        alert("At least a Lease / Pad Name or an LSD is required.");
+        return;
+      }
+
+      leases.push(lease);
+      saveLeases();
+      renderLeases();
+      leaseForm.reset();
+    });
+
+    clearLeaseFormBtn.addEventListener("click", () => {
+      leaseForm.reset();
+    });
+
+    leaseSearchInput.addEventListener("input", () => {
+      renderLeases();
+    });
+
+    function renderLeases() {
+      const term = leaseSearchInput.value.trim().toLowerCase();
+      leasesTableBody.innerHTML = "";
+
+      leases
+        .map((lease, index) => ({ lease, index }))
+        .filter(({ lease }) => {
+          if (!term) return true;
+          const haystack =
+            (lease.name || "") +
+            " " +
+            (lease.client || "") +
+            " " +
+            (lease.lsd || "") +
+            " " +
+            (lease.roadNotes || "") +
+            " " +
+            (lease.extra || "");
+          return haystack.toLowerCase().includes(term);
+        })
+        .forEach(({ lease, index }) => {
+          const tr = document.createElement("tr");
+
+          tr.innerHTML = `
+            <td>
+              <strong>${escapeHTML(lease.name || "(No name)")}</strong>
+              <div class="tiny">${escapeHTML(lease.createdAt)}</div>
+            </td>
+            <td>
+              <div>${escapeHTML(lease.client || "-")}</div>
+              <div class="tiny">${escapeHTML(lease.lsd || "")}</div>
+            </td>
+            <td style="max-width:220px;">
+              <div>${escapeHTML(lease.roadNotes || "")}</div>
+              <div class="tiny">${escapeHTML(lease.extra || "")}</div>
+            </td>
+            <td>
+              <button type="button" class="btn btn-primary btn-small" data-use-lease="${index}">
+                ⇨ Use for Call
+              </button>
+              <button type="button" class="btn btn-danger btn-small" data-delete-lease="${index}">
+                ✖
+              </button>
+            </td>
+          `;
+
+          leasesTableBody.appendChild(tr);
+        });
+
+      // Wire up "Use for Call"
+      document.querySelectorAll("[data-use-lease]").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const idx = Number(e.target.dataset.useLease);
+          const lease = leases[idx];
+          if (!lease) return;
+
+          // Fill dispatch form fields
+          document.getElementById("client").value = lease.client || "";
+          document.getElementById("location").value = lease.lsd || "";
+
+          const extraBits = [];
+          if (lease.name) extraBits.push("Lease: " + lease.name);
+          if (lease.roadNotes) extraBits.push("Access: " + lease.roadNotes);
+          if (lease.extra) extraBits.push("Notes: " + lease.extra);
+
+          const existingNotes = document.getElementById("notes").value.trim();
+          const combined = (existingNotes ? existingNotes + "\n" : "") + extraBits.join("\n");
+          document.getElementById("notes").value = combined;
+
+          // Scroll to dispatch form
+          document.getElementById("callId").scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+      });
+
+      // Wire up delete lease
+      document.querySelectorAll("[data-delete-lease]").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const idx = Number(e.target.dataset.deleteLease);
+          leases.splice(idx, 1);
+          saveLeases();
+          renderLeases();
+        });
+      });
+    }
+
     function escapeHTML(str) {
       return String(str)
         .replace(/&/g, "&amp;")
@@ -505,6 +737,13 @@
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
     }
+
+    // Initial render
+    renderLeases();
   </script>
 </body>
 </html>
+
+
+
+
