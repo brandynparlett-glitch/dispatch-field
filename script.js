@@ -12,12 +12,13 @@ alert("Your JavaScript is working!");
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-const clearButton = document.getElementById("clearBtn");
-const form = document.getElementById("dispatchForm");
+const clearButton = document.getElementById("clearFormBtn");
 
-if (clearButton && form) {
+if (clearButton && clearButton.form) {
 clearButton.addEventListener("click", () => {
-form.reset();
+clearButton.form.reset();
 });
+} else {
+console.error("Clear button or its form not found.");
 }
 });
