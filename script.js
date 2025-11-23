@@ -10,3 +10,7 @@ testButton.addEventListener("click", () => {
 alert("Your JavaScript is working!");
 });
 });
+
+document.getElementById("clearBtn").addEventListener("click", function() {
+document.getElementById("dispatchForm").reset();
+});
