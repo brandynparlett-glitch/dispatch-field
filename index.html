@@ -294,6 +294,115 @@
 </select>
 </div>
 
+<!-- ===== TICKETS REQUIRED ===== -->
+
+<fieldset class="field-group">
+
+  <legend>Tickets Required</legend>
+
+
+
+  <label>
+
+    <input type="checkbox" name="ticketsRequired" value="H2S Alive">
+
+    H2S Alive
+
+  </label>
+
+
+
+  <label>
+
+    <input type="checkbox" name="ticketsRequired" value="CSO">
+
+    CSO (Common Safety Orientation)
+
+  </label>
+
+
+
+  <label>
+
+    <input type="checkbox" name="ticketsRequired" value="WHMIS">
+
+    WHMIS
+
+  </label>
+
+
+
+  <label>
+
+    <input type="checkbox" name="ticketsRequired" value="TDG">
+
+    TDG (if applicable)
+
+  </label>
+
+
+
+  <label>
+
+    <input type="checkbox" name="ticketsRequired" value="Other">
+
+    Other (see notes)
+
+  </label>
+
+</fieldset>
+
+
+
+<!-- ===== DRIVER REQUIREMENTS ===== -->
+
+<fieldset class="field-group">
+
+  <legend>Driver Requirements</legend>
+
+
+
+  <!-- Licence class dropdown -->
+
+  <div class="field-row">
+
+    <label for="driverClass">Driver’s Licence Required</label>
+
+    <select id="driverClass" name="driverClass">
+
+      <option value="">Select…</option>
+
+      <option value="Class 5">Class 5</option>
+
+      <option value="Class 4">Class 4</option>
+
+      <option value="Class 3">Class 3</option>
+
+      <option value="Class 1">Class 1</option>
+
+    </select>
+
+  </div>
+
+  
+
+  <!-- Clean abstract checkbox -->
+
+  <label class="field-inline">
+
+    <input
+
+      type="checkbox"
+
+      id="cleanAbstract"
+
+      name="cleanAbstract"
+
+      value="Clean Abstract Required"
+
+
+                
+
                 <label for="status">Status</label>
                 <select id="status" name="status">
                   <option selected>Pending</option>
@@ -769,6 +878,7 @@
 </body>
 </html>
 <script src="script.js"></script>
+
 
 
 
