@@ -10,6 +10,10 @@ testButton.addEventListener("click", () => {
 alert("Your JavaScript is working!");
 });
 });
+function getSelectedTickets() {
+const checked = document.querySelectorAll('input[name="ticketsRequired"]:checked');
+return Array.from(checked).map(cb => cb.value).join('; ');
+}
 
 document.addEventListener("DOMContentLoaded", () => {
 const clearButton = document.getElementById("clearFormBtn");
