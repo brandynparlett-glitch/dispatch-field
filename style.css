@@ -1,1 +1,13 @@
+:root {
+--mm-navy: #1e2f5c;
+--mm-blue: #3b6cb7;
+--mm-light: #f4f7fb;
+--mm-border: #d9e1ee;
+}
 
+body {
+margin: 0;
+font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+background: linear-gradient(180deg, #f4f7fb 0%, #eaf0fa 100%);
+color: #1e2f5c;
+}
