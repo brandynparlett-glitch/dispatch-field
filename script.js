@@ -59,6 +59,8 @@ call.cleanAbstract = document.getElementById("cleanAbstract")?.checked
 ? "Yes"
 : "No";
 
+call.medUnitResponsibility = getMedUnitResponsibility();
+  
 // Save this call in our array
 calls.push(call);
 
@@ -108,3 +110,20 @@ URL.revokeObjectURL(url);
 });
 }
 });
+
+<!-- ===== MEDIC UNIT REQUIREMENTS ===== -->
+<fieldset class="field-group">
+<legend>Fully Stocked Medic Unit</legend>
+
+<label class="radio-row">
+<input type="radio" name="medUnitResponsibility" value="MEDIC_SUPPLIES" checked>
+Fully stocked medic unit required (medic supplies unit + equipment)
+</label>
+
+<label class="radio-row">
+<input type="radio" name="medUnitResponsibility" value="REQUESTER_PROVIDES">
+Fully stocked medic unit provided by requester (unit + equipment on site)
+</label>
+
+<div class="hint" id="medUnitHint"></div>
+</fieldset>
