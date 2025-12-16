@@ -352,6 +352,22 @@
 
 </fieldset>
 
+<!-- ===== MEDIC UNIT REQUIREMENTS ===== -->
+<fieldset class="field-group">
+<legend>Fully Stocked Medic Unit</legend>
+
+<label class="radio-row">
+<input type="radio" name="medUnitResponsibility" value="MEDIC_SUPPLIES" checked>
+Fully stocked medic unit required (medic supplies unit + equipment)
+</label>
+
+<label class="radio-row">
+<input type="radio" name="medUnitResponsibility" value="REQUESTER_PROVIDES">
+Fully stocked medic unit provided by requester (unit + equipment on site)
+</label>
+
+<div class="hint" id="medUnitHint"></div>
+</fieldset>
 
 
 <!-- ===== DRIVER REQUIREMENTS ===== -->
@@ -885,6 +901,7 @@
 </body>
 </html>
 <script src="script.js"></script>
+
 
 
 
