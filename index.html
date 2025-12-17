@@ -173,32 +173,16 @@ Fully stocked medic unit provided by requester (unit + equipment on site)
 
   </div>
 
-  
-
-  <!-- Clean abstract checkbox -->
-
-  <label class="field-inline">
-
-    <input
-
-      type="checkbox"
-
-      id="cleanAbstract"
-
-      name="cleanAbstract"
-
-      value="Clean Abstract Required"
-      >
-
-    Clean abstract required
-
-  </label>
+<label for="driverAbstract">Driver’s Licence / Abstract</label>
+<select id="driverAbstract" name="driverAbstract">
+<option value="">Select requirement</option>
+<option value="not-required">Not required</option>
+<option value="clean-abstract">Valid licence + clean abstract required</option>
+<option value="licence-only">Valid licence required</option>
+</select>
 
 </fieldset>
-
-
-                
-
+            
                 <label for="status">Status</label>
                 <select id="status" name="status">
                   <option selected>Pending</option>
@@ -674,6 +658,7 @@ Fully stocked medic unit provided by requester (unit + equipment on site)
 </body>
 </html>
 <script src="script.js"></script>
+
 
 
 
