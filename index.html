@@ -231,6 +231,14 @@ type="text"
 id="loaAmount"
 name="loaAmount"
 placeholder="e.g. $150/day, $900/week"
+
+<label for="travelType">Travel</label>
+<select id="travelType" name="travelType">
+<option value="">Select travel type</option>
+<option value="hourly">Hourly</option>
+<option value="per-km">Per kilometre</option>
+<option value="not-paid">Not paid</option>
+</select>  
 >       
             <div style="margin-top:0.75rem;">
               <label for="notes">Notes</label>
@@ -682,6 +690,7 @@ placeholder="e.g. $150/day, $900/week"
 </body>
 </html>
 <script src="script.js"></script>
+
 
 
 
