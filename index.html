@@ -67,99 +67,80 @@
 
   <legend>Tickets Required</legend>
 
+<h3>Certifications Required</h3>
 
+<div class="checkbox-row">
+<input type="checkbox" id="h2s" name="certifications" value="H2S Alive">
+<label for="h2s">H2S Alive</label>
+</div>
 
-  <label>
+<div class="checkbox-row">
+<input type="checkbox" id="cso" name="certifications" value="CSO">
+<label for="cso">CSO (Common Safety Orientation)</label>
+</div>
 
-    <input type="checkbox" name="ticketsRequired" value="H2S Alive">
+<div class="checkbox-row">
+<input type="checkbox" id="whmis" name="certifications" value="WHMIS">
+<label for="whmis">WHMIS</label>
+</div>
 
-    H2S Alive
+<div class="checkbox-row">
+<input type="checkbox" id="tdg" name="certifications" value="TDG">
+<label for="tdg">TDG (if applicable)</label>
+</div>
 
-  </label>
+<div class="checkbox-row">
+<input type="checkbox" id="other-cert" name="certifications" value="Other">
+<label for="other-cert">Other (see notes)</label>
+</div>
 
+<hr>
 
+<h3>Medic Unit</h3>
 
-  <label>
-
-    <input type="checkbox" name="ticketsRequired" value="CSO">
-
-    CSO (Common Safety Orientation)
-
-  </label>
-
-
-
-  <label>
-
-    <input type="checkbox" name="ticketsRequired" value="WHMIS">
-
-    WHMIS
-
-  </label>
-
-
-
-  <label>
-
-    <input type="checkbox" name="ticketsRequired" value="TDG">
-
-    TDG (if applicable)
-
-  </label>
-
-
-
-  <label>
-
-    <input type="checkbox" name="ticketsRequired" value="Other">
-
-    Other (see notes)
-
-  </label>
-
-</fieldset>
-
-<!-- ===== MEDIC UNIT REQUIREMENTS ===== -->
-<fieldset class="field-group">
-<legend>Fully Stocked Medic Unit</legend>
-
-<label class="radio-row">
-<input type="radio" name="medUnitResponsibility" value="MEDIC_SUPPLIES" checked>
+<div class="checkbox-row">
+<input type="radio" id="unit-required" name="medicUnit" value="required">
+<label for="unit-required">
 Fully stocked medic unit required (medic supplies unit + equipment)
 </label>
+</div>
 
-<label class="radio-row">
-<input type="radio" name="medUnitResponsibility" value="REQUESTER_PROVIDES">
+<div class="checkbox-row">
+<input type="radio" id="unit-provided" name="medicUnit" value="provided">
+<label for="unit-provided">
 Fully stocked medic unit provided by requester (unit + equipment on site)
 </label>
+</div>
 
-<div class="hint" id="medUnitHint"></div>
-</fieldset>
+<hr>
 
-<label>
-<input type="checkbox" name="ppeRequired" value="Hard Hat">
-Hard hat
-</label>
+<h3>PPE Required</h3>
 
-<label>
-<input type="checkbox" name="ppeRequired" value="Safety Glasses">
-Safety glasses
-</label>
+<div class="checkbox-row">
+<input type="checkbox" id="hard-hat" name="ppe" value="Hard hat">
+<label for="hard-hat">Hard hat</label>
+</div>
 
-<label>
-<input type="checkbox" name="ppeRequired" value="CSA Boots">
-CSA steel-toe boots
-</label>
+<div class="checkbox-row">
+<input type="checkbox" id="safety-glasses" name="ppe" value="Safety glasses">
+<label for="safety-glasses">Safety glasses</label>
+</div>
 
-<label>
-<input type="checkbox" name="ppeRequired" value="FR Coveralls">
-FR coveralls
-</label>
+<div class="checkbox-row">
+<input type="checkbox" id="steel-toe" name="ppe" value="CSA steel-toe boots">
+<label for="steel-toe">CSA steel-toe boots</label>
+</div>
 
-<label>
-<input type="checkbox" name="ppeRequired" value="FR Winter Jacket">
-FR winter jacket / winter attire
-</label>
+<div class="checkbox-row">
+<input type="checkbox" id="fr-coveralls" name="ppe" value="FR coveralls">
+<label for="fr-coveralls">FR coveralls</label>
+</div>
+
+<div class="checkbox-row">
+<input type="checkbox" id="fr-winter" name="ppe" value="FR winter jacket">
+<label for="fr-winter">FR winter jacket / winter attire</label>
+</div>
+
 
                 
 <!-- ===== DRIVER REQUIREMENTS ===== -->
@@ -693,6 +674,7 @@ FR winter jacket / winter attire
 </body>
 </html>
 <script src="script.js"></script>
+
 
 
 
