@@ -207,7 +207,23 @@ Fully stocked medic unit provided by requester (unit + equipment on site)
 
             <label for="start-date">Start Date:</label>
 <input type="date" id="start-date" name="start-date">
+     <h3>Compensation</h3>
+
+<label for="payType">Rate of Pay</label>
+<select id="payType" name="payType">
+<option value="">Select pay type</option>
+<option value="hourly">Hourly</option>
+<option value="day-rate">Day rate</option>
+<option value="flat-rate">Flat rate</option>
+<option value="negotiable">To be negotiated</option>
+</select>
             
+<input
+type="text"
+id="payAmount"
+name="payAmount"
+placeholder="e.g. $55/hr, $650/day, $450 flat"
+>       
             <div style="margin-top:0.75rem;">
               <label for="notes">Notes</label>
               <textarea id="notes" name="notes" placeholder="Gate codes, hazards, radio channel, etc."></textarea>
@@ -658,6 +674,7 @@ Fully stocked medic unit provided by requester (unit + equipment on site)
 </body>
 </html>
 <script src="script.js"></script>
+
 
 
 
