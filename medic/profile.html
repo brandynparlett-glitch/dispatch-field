@@ -1,1 +1,37 @@
+<section class="card">
+<h2>Location</h2>
+<p class="muted">City only. No full address.</p>
+
+<button id="useLocationBtn" class="btn" type="button">Use my current location</button>
+<p id="locStatus" class="tiny muted"></p>
+
+<div class="grid2">
+<div>
+<label class="label">City</label>
+<input id="city" class="input" type="text" placeholder="e.g., Grande Prairie" />
+</div>
+<div>
+<label class="label">Province</label>
+<select id="province" class="input">
+<option value="">Select</option>
+<option>BC</option><option>AB</option><option>SK</option><option>MB</option>
+<option>ON</option><option>QC</option><option>NB</option><option>NS</option>
+<option>PE</option><option>NL</option><option>NT</option><option>NU</option><option>YT</option>
+</select>
+</div>
+</div>
+
+<hr style="opacity:.2; margin: 14px 0;">
+
+<h3>Preferred Locations</h3>
+<p class="muted">Add any other cities you’re willing to work in.</p>
+
+<div class="row">
+<input id="prefLocationInput" class="input" type="text" placeholder="Add a city (e.g., Fort St. John)" />
+<button id="addPrefLocationBtn" class="btn secondary" type="button">Add</button>
+</div>
+
+<div id="prefLocationsList" class="chips"></div>
+</section>
+
 
