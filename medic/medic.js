@@ -1,3 +1,29 @@
+// Headshot preview
+const headshotInput = document.getElementById("headshot");
+const headshotPreview = document.getElementById("headshotPreview");
+
+if (headshotInput && headshotPreview) {
+headshotInput.addEventListener("change", () => {
+const file = headshotInput.files && headshotInput.files[0];
+if (!file) return;
+
+const reader = new FileReader();
+reader.onload = () => {
+headshotPreview.src = reader.result;
+headshotPreview.style.display = "block";
+};
+reader.readAsDataURL(file);
+});
+}
+
+// TEMP: confirm radios are working (prints selected value)
+document.addEventListener("change", (e) => {
+if (e.target && e.target.name === "level") {
+console.log("Selected level:", e.target.value);
+}
+});
+
+
 // --- LOCATION: GPS + Google reverse geocode ---
 // 1) Uses browser GPS (navigator.geolocation)
 // 2) Uses Google Geocoding API to translate lat/lng to City + Province
