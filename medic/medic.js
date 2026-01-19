@@ -161,3 +161,20 @@ console.log("Location button clicked ✅");
 // your geolocation code here...
 });
 });
+
+<script>
+const otherCheckbox = document.getElementById("ticketOther");
+const otherInput = document.getElementById("otherTickets");
+
+if (otherCheckbox && otherInput) {
+otherCheckbox.addEventListener("change", () => {
+if (otherCheckbox.checked) {
+otherInput.style.display = "block";
+otherInput.focus();
+} else {
+otherInput.style.display = "none";
+otherInput.value = "";
+}
+});
+}
+</script>
