@@ -148,3 +148,16 @@ prefInput.value = "";
 }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+const btn = document.getElementById("btnUseLocation"); // your button id
+if (!btn) {
+console.error("Use location button not found. Check the id.");
+return;
+}
+
+btn.addEventListener("click", (e) => {
+e.preventDefault();
+console.log("Location button clicked ✅");
+// your geolocation code here...
+});
+});
