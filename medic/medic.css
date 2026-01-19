@@ -194,3 +194,16 @@ font-weight: 700; cursor: pointer;
 
 body { background: yellow !important; }
 h1 { color: red !important; }
+
+<label>
+<input type="checkbox" id="ticketOther" name="tickets[]" value="Other">
+Other (please specify)
+</label>
+
+<input
+type="text"
+id="otherTickets"
+name="otherTickets"
+placeholder="Enter other tickets (comma separated)"
+style="display:none; margin-left:20px;"
+/>
