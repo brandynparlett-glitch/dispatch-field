@@ -195,15 +195,13 @@ font-weight: 700; cursor: pointer;
 body { background: yellow !important; }
 h1 { color: red !important; }
 
-<label>
-<input type="checkbox" id="ticketOther" name="tickets[]" value="Other">
-Other (please specify)
-</label>
+fieldset.tickets {
+border: 1px solid #ccc;
+padding: 12px;
+margin-top: 15px;
+}
 
-<input
-type="text"
-id="otherTickets"
-name="otherTickets"
-placeholder="Enter other tickets (comma separated)"
-style="display:none; margin-left:20px;"
-/>
+fieldset.tickets label {
+display: block;
+margin: 6px 0;
+}
