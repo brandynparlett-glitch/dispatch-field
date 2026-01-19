@@ -135,4 +135,81 @@ Other
 <div id="prefLocationsList" class="chips"></div>
 </section>
 
+<!-- Example fields -->
+<input id="city" name="city" placeholder="City only. No full address." />
+<input type="hidden" id="lat" name="lat" />
+<input type="hidden" id="lng" name="lng" />
 
+<button id="btnUseLocation" type="button">Use my current location</button>
+
+<script>
+const btn = document.getElementById("btnUseLocation");
+const cityInput = document.getElementById("city");
+const latInput = document.getElementById("lat");
+const lngInput = document.getElementById("lng");
+
+btn.addEventListener("click", async (e) => {
+e.preventDefault();
+
+if (!("geolocation" in navigator)) {
+alert("Location not supported on this browser.");
+return;
+}
+
+btn.disabled = true;
+btn.textContent = "Getting location...";
+
+navigator.geolocation.getCurrentPosition(
+async (pos) => {
+try {
+const { latitude, longitude } = pos.coords;
+latInput.value = latitude;
+lngInput.value = longitude;
+
+// Reverse geocode to city (no full address)
+const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`;
+const res = await fetch(url, {
+headers: {
+// Nominatim likes a User-Agent, but browsers restrict it;
+// this is usually fine for light testing. For production, use your own geocoder.
+"Accept": "application/json"
+}
+});
+const data = await res.json();
+
+const addr = data.address || {};
+const city =
+addr.city || addr.town || addr.village || addr.hamlet || addr.county || "";
+
+if (!city) {
+alert("Got coordinates, but couldn’t detect a city name.");
+} else {
+cityInput.value = city;
+}
+} catch (err) {
+console.error(err);
+alert("Location found, but city lookup failed.");
+} finally {
+btn.disabled = false;
+btn.textContent = "Use my current location";
+}
+},
+(err) => {
+console.warn(err);
+let msg = "Couldn’t get your location.";
+if (err.code === 1) msg = "Location permission denied. Allow it in browser settings.";
+if (err.code === 2) msg = "Location unavailable (GPS/network).";
+if (err.code === 3) msg = "Location request timed out. Try again.";
+alert(msg);
+
+btn.disabled = false;
+btn.textContent = "Use my current location";
+},
+{
+enableHighAccuracy: false,
+timeout: 10000,
+maximumAge: 60000,
+}
+);
+});
+</script>
